@@ -5,7 +5,6 @@ const User = require('../models/users.model');
 const AppError = require('../utils/AppError');
 
 exports.protect = catchAsync(async (req, res, next) => {
-  //1. Getting token and check of it's there
   let token;
   if (
     req.headers.authorization &&
@@ -20,13 +19,11 @@ exports.protect = catchAsync(async (req, res, next) => {
     );
   }
 
-  //2. verification token
   const decoded = await promisify(jwt.verify)(
     token,
     process.env.SECRET_JWT_SEED
   );
 
-  //3 check if user still exist
   const user = await User.findOne({
     where: {
       id: decoded.id,
@@ -71,10 +68,12 @@ exports.protectAccountOwner = catchAsync(async (req, res, next) => {
 });
 
 exports.restrictTo = (...roles) => {
-  return (req, res, next) =>{
-    if(!roles.includes(req.sessionUser.role)){
-      return next(new AppError('Yuo do not have permission to perfom this action!', 403))
+  return (req, res, next) => {
+    if (!roles.includes(req.sessionUser.role)) {
+      return next(
+        new AppError('Yuo do not have permission to perfom this action!', 403)
+      );
     }
-    next()
-  }
-}
+    next();
+  };
+};

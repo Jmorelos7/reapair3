@@ -43,9 +43,8 @@ exports.createUser = catchAsync(async (req, res, next) => {
   });
 });
 exports.updateUser = catchAsync(async (req, res, next) => {
-  
   const { name, email } = req.body;
-  const {user} = req;
+  const { user } = req;
 
   await user.update({ name, email });
 

@@ -22,17 +22,17 @@ router.get('/', findAllUsers);
 
 router.get('/:id', validIfExistUser, findOneUser);
 
-// router.post(
-//   '/',
-//   [
-//     check('name', 'The name is required').not().isEmpty(),
-//     check('email', 'The email is required').not().isEmpty(),
-//     check('email', 'The email must be a correct format').isEmail(),
-//     check('password', 'The password is required').not().isEmpty(),
-//     validateFields,
-//   ],
-//   createUser
-// );
+router.post(
+  '/',
+  [
+    check('name', 'The name is required').not().isEmpty(),
+    check('email', 'The email is required').not().isEmpty(),
+    check('email', 'The email must be a correct format').isEmail(),
+    check('password', 'The password is required').not().isEmpty(),
+    validateFields,
+  ],
+  createUser
+);
 
 router.use(protect);
 

@@ -21,7 +21,7 @@ exports.findAllRepairs = catchAsync(async (req, res, next) => {
 });
 
 exports.findOneRepair = catchAsync(async (req, res, next) => {
-  const { id } = req
+  const { id } = req;
 
   return res.status(200).json({
     status: 'success',
@@ -32,7 +32,12 @@ exports.findOneRepair = catchAsync(async (req, res, next) => {
 exports.createRepair = catchAsync(async (req, res, next) => {
   const { date, userId, description, motorsNumber } = req.body;
 
-  const repair = await Repair.create({ date, userId, description, motorsNumber });
+  const repair = await Repair.create({
+    date,
+    userId,
+    description,
+    motorsNumber,
+  });
 
   return res.status(201).json({
     status: 'success',

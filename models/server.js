@@ -8,26 +8,21 @@ const initModel = require('./initModels');
 const AppError = require('../utils/appError');
 const { authRouter } = require('../routes/auth.routes');
 
-
 class Server {
   constructor() {
     this.app = express();
     this.port = process.env.PORT;
 
-    //Path Routes
     this.paths = {
       auth: '/api/v1/auth',
       repairs: '/api/v1/repairs',
       users: '/api/v1/users',
     };
 
-    //Connect to db
     this.database();
 
-    //Middlewares
     this.middlewares();
 
-    //Routes
     this.routes();
   }
 
@@ -53,7 +48,6 @@ class Server {
       .then(() => console.log('Database authenticated 😂'))
       .catch(err => console.log(err));
 
-    //relations
     initModel();
 
     db.sync()

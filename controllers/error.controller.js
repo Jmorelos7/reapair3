@@ -37,9 +37,8 @@ const globalErrorHandler = (err, req, res, next) => {
       error = err;
     }
 
-    if(error.parent?.code === '22P02') error = handleCastErrorDB(error);
-    if(error.name === 'JsonWebTokenError') error = handleJWTErrorDB(error);
-
+    if (error.parent?.code === '22P02') error = handleCastErrorDB(error);
+    if (error.name === 'JsonWebTokenError') error = handleJWTErrorDB(error);
 
     sendErrorProd(error, res);
   }
